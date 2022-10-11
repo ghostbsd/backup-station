@@ -552,7 +552,7 @@ class BootEnvironmentsManager(object):
         msg.setText("<h3>Boot Environments</h3>")
         msg.setInformativeText(
             _("A simple preferences application to modify <a href='https://bsd-pl.org/assets/talks/2018-07-30_1_S%C5%82awomir-Wojciech-Wojtczak_ZFS-Boot-Environments.pdf'>ZFS Boot Environments</a> \
-            <br><br>Source code: <a href='https://github.com/helloSystem/Utilities'>https://github.com/helloSystem/Utilities</a>"))
+            <br><br>Source code: <a href='https://github.com/ghostbsd/backup-station'>https://github.com/ghostbsd/backup-station</a>"))
         msg.exec()
 
     def _showHelp(self):
