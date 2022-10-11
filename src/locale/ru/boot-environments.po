@@ -1,0 +1,299 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-11 12:29+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/boot-environments.py:75
+msgid "Backup Station"
+msgstr "Центр резервного копирования"
+
+#: src/boot-environments.py:103
+msgid "Select the environment the computer should start into or create new"
+msgstr ""
+"Выберите загрузочное окружение которое система будет использовать при "
+"следующем старте или создайте новое"
+
+#: src/boot-environments.py:112
+msgid "Restart..."
+msgstr "Перезапуск..."
+
+#: src/boot-environments.py:116
+msgid "New..."
+msgstr "Новое..."
+
+#: src/boot-environments.py:119 src/boot-environments.py:390
+msgid "Remove"
+msgstr "Удаление"
+
+#: src/boot-environments.py:122 src/boot-environments.py:259
+#: src/boot-environments.py:268
+msgid "Unmount"
+msgstr "Отмотровать"
+
+#: src/boot-environments.py:174
+msgid "Boot Environment"
+msgstr "Имя"
+
+#: src/boot-environments.py:174
+msgid "Active"
+msgstr "Активно"
+
+#: src/boot-environments.py:174
+msgid "Mountpoint"
+msgstr "Точка монтрования"
+
+#: src/boot-environments.py:174
+msgid "Space"
+msgstr "Размер"
+
+#: src/boot-environments.py:174
+msgid "Created"
+msgstr "Создано"
+
+#: src/boot-environments.py:185
+msgid "Now and on reboot"
+msgstr "Сейчас и при сл. старте"
+
+#: src/boot-environments.py:188
+msgid "Now"
+msgstr "Сейчас"
+
+#: src/boot-environments.py:190
+msgid "On reboot"
+msgstr "При сл. старте"
+
+#: src/boot-environments.py:229
+msgid "Restart"
+msgstr "Перезапуск"
+
+#: src/boot-environments.py:230
+msgid ""
+"Are you sure you want to restart your computer now?\n"
+"All unsaved work will be lost."
+msgstr ""
+"Вы действительно хотите сейчас перезагрузить компьютер?\n"
+"Все несохраненные данные будут потеряны."
+
+#: src/boot-environments.py:265
+msgid "Mount"
+msgstr "Примотировать"
+
+#: src/boot-environments.py:296 src/boot-environments.py:313
+#: src/boot-environments.py:352 src/boot-environments.py:369
+#: src/boot-environments.py:414 src/boot-environments.py:431
+#: src/boot-environments.py:478 src/boot-environments.py:495
+msgid "Error"
+msgstr "Ошибка"
+
+#: src/boot-environments.py:310
+msgid "Could not activate Boot Environment"
+msgstr "Невозможно активироать это окружение"
+
+#: src/boot-environments.py:326
+msgid "New"
+msgstr "Новое"
+
+#: src/boot-environments.py:327
+msgid "Boot Environment Name:"
+msgstr "Имя загрузочного окружения:"
+
+#: src/boot-environments.py:346
+msgid "bectl create started"
+msgstr "bectl запустил создание"
+
+#: src/boot-environments.py:348
+msgid "bectl create cannot be launched"
+msgstr "bectl не может запустить создание"
+
+#: src/boot-environments.py:366
+msgid "Could not create Boot Environment"
+msgstr "Не возможно создать загрузочное окружение"
+
+#: src/boot-environments.py:391
+#, python-format
+msgid ""
+"Do you really want to remove %s?\n"
+"This cannot be undone."
+msgstr ""
+"Вы дествительно ходите удалить %s?\n"
+"Эта оперция не может быть отменена"
+
+#: src/boot-environments.py:397
+#, python-format
+msgid "Removing: %s"
+msgstr "Удаление: %s "
+
+#: src/boot-environments.py:408
+msgid "bectl destroy started"
+msgstr "bectl запустил удаление"
+
+#: src/boot-environments.py:410
+msgid "bectl destroy cannot be launched"
+msgstr "bectl не может запустить удаление"
+
+#: src/boot-environments.py:428
+msgid "Could not destroy Boot Environment"
+msgstr "Невозможно удалить загрузочное окружение"
+
+#: src/boot-environments.py:474
+#, python-format
+msgid "bectl %s cannot be launched"
+msgstr "bectl не может запусить %s"
+
+#: src/boot-environments.py:492
+#, python-format
+msgid "Could not %s Boot Environment"
+msgstr "Невозможно выполнить %s для этого загрузчного окружения"
+
+#: src/boot-environments.py:521
+msgid "&Quit"
+msgstr "&Выйти"
+
+#: src/boot-environments.py:522
+msgid "Ctrl+Q"
+msgstr ""
+
+#: src/boot-environments.py:523
+msgid "Exit application"
+msgstr "Закрыть приложение"
+
+#: src/boot-environments.py:526
+msgid "&File"
+msgstr "&Файл"
+
+#: src/boot-environments.py:529
+msgid "&About"
+msgstr "&О приложении"
+
+#: src/boot-environments.py:530
+msgid "About this application"
+msgstr "Об этом приложении"
+
+#: src/boot-environments.py:533
+msgid "&Usage"
+msgstr "Использование"
+
+#: src/boot-environments.py:534
+msgid "How use this application"
+msgstr "Как пользоваться этим приложением"
+
+#: src/boot-environments.py:536
+msgid "&Help"
+msgstr "&Помощь"
+
+#: src/boot-environments.py:543
+msgid "About"
+msgstr "О приложении"
+
+#: src/boot-environments.py:554
+msgid ""
+"A simple preferences application to modify <a href='https://bsd-pl.org/"
+"assets/talks/2018-07-30_1_S%C5%82awomir-Wojciech-Wojtczak_ZFS-Boot-"
+"Environments.pdf'>ZFS Boot Environments</a>             <br><br>Source code: "
+"<a href='https://github.com/helloSystem/Utilities'>https://github.com/"
+"helloSystem/Utilities</a>"
+msgstr ""
+"Простое приложение для изменения настроек <a href='https://bsd-pl.org/assets/"
+"talks/2018-07-30_1_S%C5%82awomir-Wojciech-Wojtczak_ZFS-Boot-Environments."
+"pdf'> загрузочных сред ZFS</a><br><br>Исходный код: <a href='https://github."
+"com/helloSystem/Utilities'>https://github.com/helloSystem/Utilities</a>"
+
+#: src/boot-environments.py:561
+msgid "Help"
+msgstr "Помощь"
+
+#: src/boot-environments.py:562
+msgid "<h3>Description and usage</h3>"
+msgstr "<h3>Описание и использование</h3>"
+
+#: src/boot-environments.py:564
+msgid ""
+"<hr><h4>General information</h4             <p>Boot Environments are "
+"bootable clones of snapshots of the working system.             Before "
+"upgrading or making major changes to the system, it is strongly recommended "
+"that you create a safe boot environment to recover after a failure "
+"occurs.             Note that Boot Environments by default may not cover all "
+"locations, such as /home. More details about this can be found "
+"at:             <p><a href='https://www.freebsd.org/cgi/man.cgi?"
+"bectl(8)'><b>BECTL(8)</b></a>             <p><a href='https://klarasystems."
+"com/articles/basics-of-zfs-snapshot-management/'><b>Basics of ZFS Snapshot "
+"Management</b></a>             <p><a href='https://klarasystems.com/articles/"
+"managing-boot-environments/'><b>Managing boot environments</b></"
+"a>             <hr><h4>Using interface elements</h4>            "
+"<ul><li>Select an active environment for the next system boot and check in "
+"the its checkbox. At the same time, the its <b>Status</b> field will be "
+"<b>On reboot</b>.             The <b>Status</b> field can have the following "
+"values:             <small><table>             <thead>             "
+"<tr>                 <th>Values</th>                 <th>Description</"
+"th>             </tr>             </thead>             <tbody>             "
+"<tr>                 <td>-</td>                 <td><pre>       Nonactive</"
+"pre></td>             </tr>             <tr>                 <td>Now</"
+"td>                 <td><pre>       Active now</pre></td>             </"
+"tr>             <tr>                 <td>On reboot</td>                 "
+"<td><pre>       Will be active on next boot time</pre></td>             </"
+"tr>             <tr>                 <td>Now and on reboot</"
+"td>                 <td><pre>       Active now and will be active on next "
+"boot time</pre></td>             </tr>             </tbody>             </"
+"table></small></li>            <p><li>Click the button <b>[Restart...]</b> "
+"to reboot the system into the selected active environment.</li>             "
+"<p><li>Highlight a line in the list with the cursor and press the "
+"<b>[Mount]</b> button to mount the selected environment.  In this case, its "
+"path will be displayed in the <b>Mount point</b> field.</li>             "
+"<p><li>Highlight a line in the list with the cursor and press the "
+"<b>[Umount]</b> button to unmount the selected environment. In this case, "
+"the path will not be displayed in the <b>Mount point</b> field.</"
+"li>             <p><li>Highlight a line in the list with the cursor and "
+"press the <b>[Remove]</b> button to remove the selected environment. This "
+"environment will disappear from the list after confirming the deletion.</"
+"li>             <p><li>Click the button <b>[New...]</b> to create a new "
+"environment. The new environment will appear in the list after entering its "
+"name.</b></li></ul>             <p> You must have root privileges to work "
+"with this program!"
+msgstr ""
+"<hr><h4>Общие сведения</h4><p>Загрузочные окружения - это клоны моментальных "
+"снимков загрузочной среды текущего состояния системы. Перед обновлением или "
+"внесением серьезных изменений в систему настоятельно рекомендуется создавать "
+"безопасную загрузочную среду для восстановления после возникновения сбоя. "
+"Обратите внимание, что загрузочные оркружения по умолчанию могут не "
+"охватывать все расположения данных, например в каталоге /home. Более "
+"подробно об этом можно ознакомиться по этим ссылкам: <p><a href='https://www."
+"freebsd.org/cgi/man.cgi?bectl(8)'><b>BECTL(8)</b></a><p><a href='https://"
+"klarasystems.com/articles/basics-of-zfs-snapshot-management/'><b>Basics of "
+"ZFS Snapshot Management</b></a> <p><a href='https://klarasystems.com/"
+"articles/managing-boot-environments/'><b>Managing boot environments</b></"
+"a><hr><h4>Использование элементов интерфейса</h4><ul><li>Для выбора "
+"активного окружения при следующей загрузке системы, отметьте ее чекбокс "
+"флажком.  При этом поле <b>Статус</b> оружения станет <b>При сл. старте</b>. "
+"Ниже представлены всевозможные значения поля <b>Статсус</b>: "
+"<small><table><thead><tr><th>Значение</th><th>Описание</th></tr></"
+"thead><tbody><tr><td>-</td><td><pre>   Неактивно</pre></td></"
+"tr><tr><td>Сейчас</td><td><pre>   Активно сейчас</pre></td></tr><tr><td>При "
+"сл. загрузке</td><td><pre>   Будет активно при следующей загрузке системы</"
+"pre></td></tr><tr><td>Сейчас и при сл. загрузке</td><td><pre>   Активно "
+"сейчас и при следующей загрузке системы</pre></td></tr></tbody></table></"
+"small></li><p><li>Для перезагрузки системы в выбранное активное окружение "
+"нажмите кнопку <b>[Перезапуск...]</b> </li> <p><li>Для монтрования окружения "
+"выделите курсором строку в списке и нажмите кнопку <b>[Примонтировать]</b>. "
+"При этом в поле <b>Точка монтирования</b> будет отображаться ее путь.</"
+"li><p><li>Для размонтрования окружения выделите курсором строку в списке и "
+"нажмите кнопку <b>[Отмонтировать]</b>. При этом в поле <b>Точка "
+"монтирования</b> путь отображаться не будет.</li> <p><li>Для удаления "
+"окружения выделите курсором строку в списке и нажмите кнопку <b>[Удаление]</"
+"b>. После подтверждения удаления это окружение отображаться в списке больше "
+"не будет.</li><p><li>Для создания нового окружения нажмите кнопку "
+"<b>[Новое....]</b></li></ul><p>Для работы с программой у Вас должны быть "
+"права превилигированного пользователя!"

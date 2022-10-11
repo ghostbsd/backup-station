@@ -1,0 +1,3 @@
+#!/bin/sh
+
+SUDO_ASKPASS="/usr/local/lib/boot-environments/askpass.py" exec "/usr/local/lib/boot-environments/boot-environments.py" "$@"
