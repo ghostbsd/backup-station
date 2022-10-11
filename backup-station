@@ -5,9 +5,11 @@ import crypt
 import gi
 import os
 import pwd
-
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
+
+__VERSION__ = '0.1'
+
 
 class BackupStationWindow(Gtk.Window):
     def createBEList(self):
@@ -114,6 +116,7 @@ class BackupStationWindow(Gtk.Window):
         self.add(vbox)
         self.connect("destroy", Gtk.main_quit)
 
+
 class PopupEntryWindow(Gtk.Window):
     def clicked(self, button):
         self.callback(self.entry.get_text())
@@ -131,6 +134,7 @@ class PopupEntryWindow(Gtk.Window):
         button = Gtk.Button('OK')
         button.connect("clicked", self.clicked)
         box.pack_start(button, True, True, 0)
+
 
 class not_root(Gtk.Window):
     def __init__(self):
@@ -155,6 +159,7 @@ class not_root(Gtk.Window):
         hBox.pack_end(ok_button, False, False, 5)
         self.show_all()
 
+
 class confirmation(Gtk.Window):
     def confirm_passwd(self, widget, user):
         pwd_hash = pwd.getpwnam(user).pw_passwd
@@ -174,7 +179,7 @@ class confirmation(Gtk.Window):
         box1 = Gtk.VBox(homogeneous=False, spacing=0)
         window.add(box1)
         box1.show()
-        label = Gtk.Label(label= 'Wrong password')
+        label = Gtk.Label(label='Wrong password')
         box1.pack_start(label, True, True, 0)
         hBox = Gtk.HBox(homogeneous=False, spacing=0)
         hBox.show()
@@ -197,7 +202,7 @@ class confirmation(Gtk.Window):
         self.add(vBox)
         vBox.show()
         label = "Confirm password for"
-        label = Gtk.Label(label = label + f" {user}")
+        label = Gtk.Label(label=label + f" {user}")
         vBox.pack_start(label, True, True, 5)
         self.passwd = Gtk.Entry()
         self.passwd.set_visibility(False)
@@ -217,6 +222,7 @@ class confirmation(Gtk.Window):
         ok_button.connect("clicked", self.confirm_passwd, user)
         hBox.pack_end(ok_button, False, False, 5)
         self.show_all()
+
 
 if os.geteuid() == 0:
     user = os.getenv("SUDO_USER")
