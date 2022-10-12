@@ -62,6 +62,18 @@ class BackupStationWindow(Gtk.Window):
         self.liststore.clear()
         self.createBEList()
 
+    def mountBE(self, button):
+        bename = self.selectBE()
+        bectl.mount_be(bename)
+        self.liststore.clear()
+        self.createBEList()
+
+    def umountBE(self, button):
+        bename = self.selectBE()
+        bectl.umount_be(bename)
+        self.liststore.clear()
+        self.createBEList()
+
     def __init__(self):
         super().__init__(title="Backup Station")
 
@@ -103,12 +115,20 @@ class BackupStationWindow(Gtk.Window):
         deleteButton = Gtk.Button.new_with_label("Delete BE")
         deleteButton.connect("clicked", self.deleteBE)
 
+        mountButton = Gtk.Button.new_with_label("Mount BE")
+        mountButton.connect("clicked", self.mountBE)
+
+        umountButton = Gtk.Button.new_with_label("Unmount BE")
+        umountButton.connect("clicked", self.umountBE)
+
         # Create boxes to hold the treeview columns and the row of buttons
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         hbox.pack_start(createButton, True, True, 0)
         hbox.pack_start(renameButton, True, True, 0)
         hbox.pack_start(deleteButton, True, True, 0)
         hbox.pack_start(activateButton, True, True, 0)
+        hbox.pack_start(mountButton, True, True, 0)
+        hbox.pack_start(umountButton, True, True, 0)
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         vbox.pack_start(self.treeview, True, True, 0)
