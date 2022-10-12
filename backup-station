@@ -123,16 +123,16 @@ class BackupStationWindow(Gtk.Window):
 
         # Create boxes to hold the treeview columns and the row of buttons
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
-        hbox.pack_start(createButton, True, True, 0)
-        hbox.pack_start(renameButton, True, True, 0)
-        hbox.pack_start(deleteButton, True, True, 0)
-        hbox.pack_start(activateButton, True, True, 0)
-        hbox.pack_start(mountButton, True, True, 0)
-        hbox.pack_start(umountButton, True, True, 0)
+        hbox.pack_start(createButton, True, True, 2)
+        hbox.pack_start(renameButton, True, True, 2)
+        hbox.pack_start(deleteButton, True, True, 2)
+        hbox.pack_start(activateButton, True, True, 2)
+        hbox.pack_start(mountButton, True, True, 2)
+        hbox.pack_start(umountButton, True, True, 2)
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
-        vbox.pack_start(self.treeview, True, True, 0)
-        vbox.pack_start(hbox, True, True, 0)
+        vbox.pack_start(self.treeview, True, True, 2)
+        vbox.pack_start(hbox, True, True, 2)
         self.add(vbox)
         self.connect("destroy", Gtk.main_quit)
 
