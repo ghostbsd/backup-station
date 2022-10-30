@@ -1,0 +1,86 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-30 00:35+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: backup-station.py:92
+msgid "BE name"
+msgstr ""
+
+#: backup-station.py:95
+msgid "Active"
+msgstr ""
+
+#: backup-station.py:98
+msgid "Mountpoint"
+msgstr ""
+
+#: backup-station.py:101
+msgid "Space"
+msgstr ""
+
+#: backup-station.py:104
+msgid "Date"
+msgstr ""
+
+#: backup-station.py:107
+msgid "Time"
+msgstr ""
+
+#: backup-station.py:111
+msgid "Create BE"
+msgstr ""
+
+#: backup-station.py:114
+msgid "Rename BE"
+msgstr ""
+
+#: backup-station.py:117
+msgid "Activate BE"
+msgstr ""
+
+#: backup-station.py:120
+msgid "Delete BE"
+msgstr ""
+
+#: backup-station.py:123
+msgid "Mount BE"
+msgstr ""
+
+#: backup-station.py:126
+msgid "Unmount BE"
+msgstr ""
+
+#: backup-station.py:151
+msgid "BE Name Entry"
+msgstr ""
+
+#: backup-station.py:167 backup-station.py:201 backup-station.py:223
+msgid "Backup Station"
+msgstr ""
+
+#: backup-station.py:173
+msgid "You need to be root"
+msgstr ""
+
+#: backup-station.py:207
+msgid "Wrong password"
+msgstr ""
+
+#: backup-station.py:229
+msgid "Confirm password for"
+msgstr ""
