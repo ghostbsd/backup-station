@@ -61,5 +61,5 @@ setup(name="backup-station",
       package_dir={'': '.'},
       data_files=data_files,
       install_requires=['setuptools', 'bectl'],
-      scripts=['backup-station'],)
-# cmdclass = cmdclass,
+      scripts=['backup-station'],
+      cmdclass = cmdclass)
