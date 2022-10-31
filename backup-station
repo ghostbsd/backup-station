@@ -80,7 +80,7 @@ class BackupStationWindow(Gtk.Window):
         self.createBEList()
 
     def __init__(self):
-        super().__init__(title="Backup Station")
+        super().__init__(title=_("Backup Station"))
 
         self.set_resizable(False)
 
