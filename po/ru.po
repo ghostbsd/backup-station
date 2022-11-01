@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-30 00:35+0300\n"
-"PO-Revision-Date: 2022-10-30 08:41+0300\n"
+"POT-Creation-Date: 2022-10-31 20:55+0300\n"
+"PO-Revision-Date: 2022-10-31 22:06+0300\n"
 "Last-Translator: Alexander Alexeev <alexax66@gmail.com>\n"
 "Language-Team: Language locale/ru\n"
 "Language: ru\n"
@@ -17,70 +17,71 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: backup-station.py:92
-msgid "BE name"
-msgstr "Имя BE"
-
-#: backup-station.py:95
-msgid "Active"
-msgstr "Активно"
-
-#: backup-station.py:98
-msgid "Mountpoint"
-msgstr "Точка монтрования"
-
-#: backup-station.py:101
-msgid "Space"
-msgstr "Размер"
-
-#: backup-station.py:104
-msgid "Date"
-msgstr "Дата создания"
-
-#: backup-station.py:107
-msgid "Time"
-msgstr "Время создания"
-
-#: backup-station.py:111
-msgid "Create BE"
-msgstr "Создать BE"
-
-#: backup-station.py:114
-msgid "Rename BE"
-msgstr "Переименовать BE"
-
-#: backup-station.py:117
-msgid "Activate BE"
-msgstr "Активировать BE"
-
-#: backup-station.py:120
-msgid "Delete BE"
-msgstr "Удалить BE"
-
-#: backup-station.py:123
-msgid "Mount BE"
-msgstr "Примонтировать BE"
-
-#: backup-station.py:126
-msgid "Unmount BE"
-msgstr "Отмонтировать BE"
-
-#: backup-station.py:151
-msgid "BE Name Entry"
-msgstr "Ввод имени BE"
-
-#: backup-station.py:167 backup-station.py:201 backup-station.py:223
+#: backup-station.py:83 backup-station.py:170 backup-station.py:205
+#: backup-station.py:228
 msgid "Backup Station"
 msgstr "Центр резеровного копирования"
 
-#: backup-station.py:173
+#: backup-station.py:94
+msgid "BE name"
+msgstr "Имя BE"
+
+#: backup-station.py:97
+msgid "Active"
+msgstr "Активно"
+
+#: backup-station.py:100
+msgid "Mountpoint"
+msgstr "Точка монтрования"
+
+#: backup-station.py:103
+msgid "Space"
+msgstr "Размер"
+
+#: backup-station.py:106
+msgid "Date"
+msgstr "Дата создания"
+
+#: backup-station.py:109
+msgid "Time"
+msgstr "Время создания"
+
+#: backup-station.py:113
+msgid "Create BE"
+msgstr "Создать BE"
+
+#: backup-station.py:116
+msgid "Rename BE"
+msgstr "Переименовать BE"
+
+#: backup-station.py:119
+msgid "Activate BE"
+msgstr "Активировать BE"
+
+#: backup-station.py:122
+msgid "Delete BE"
+msgstr "Удалить BE"
+
+#: backup-station.py:125
+msgid "Mount BE"
+msgstr "Примонтировать BE"
+
+#: backup-station.py:128
+msgid "Unmount BE"
+msgstr "Отмонтировать BE"
+
+#: backup-station.py:153
+msgid "BE Name Entry"
+msgstr "Ввод имени BE"
+
+#: backup-station.py:177
 msgid "You need to be root"
 msgstr "У вас должны быть права root"
 
-#: backup-station.py:207
+#: backup-station.py:212
 msgid "Wrong password"
 msgstr "Неверный пароль"
 
-#: backup-station.py:229
+#: backup-station.py:235
 msgid "Confirm password for"
 msgstr "Подтвердите пароль для"

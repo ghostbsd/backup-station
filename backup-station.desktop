@@ -1,7 +1,9 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Name=Backup Station
+Name[ru]=Центр резервного копирования
 Comment=Manage OpenZFS Boot Environments
+Comment[ru]=Управление загрузочными средами OpenZFS
 Exec=sudo backup-station
 Icon=document-open-recent
 Terminal=false
