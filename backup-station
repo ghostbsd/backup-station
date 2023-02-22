@@ -61,11 +61,17 @@ class BackupStationWindow(Gtk.Window):
         self.liststore.clear()
         self.createBEList()
 
-    def deleteBE(self, button):
-        bename = self.selectBE()
-        bectl.destroy_be(bename)
-        self.liststore.clear()
-        self.createBEList()
+    def deleteBE(self, widget):
+        dialog = deleteDialog(self)
+        response = dialog.run()
+
+        if(response == Gtk.ResponseType.OK):
+            bename = self.selectBE()
+            bectl.destroy_be(bename)
+            self.liststore.clear()
+            self.createBEList()
+
+        dialog.destroy()
 
     def mountBE(self, button):
         bename = self.selectBE()
@@ -143,6 +149,21 @@ class BackupStationWindow(Gtk.Window):
         self.add(vbox)
         self.connect("destroy", Gtk.main_quit)
 
+
+class deleteDialog(Gtk.Dialog):
+    def __init__(self, parent):
+        super().__init__(title="Confirm Deletion", transient_for=parent, flags=0)
+        self.add_buttons(
+            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OK, Gtk.ResponseType.OK
+        )
+        
+        self.set_default_size(150, 100)
+
+        label = Gtk.Label(label="Are you sure you want to delete this BE?")
+
+        box = self.get_content_area()
+        box.add(label)
+        self.show_all()
 
 class PopupEntryWindow(Gtk.Window):
     def clicked(self, button):
