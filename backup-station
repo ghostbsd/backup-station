@@ -17,7 +17,7 @@ _ = gettext.gettext
 
 
 class BackupStationWindow(Gtk.Window):
-    def createBEList(self):
+    def create_be_list(self):
         data = bectl.get_be_list()
         data.pop(0)
 
@@ -26,9 +26,9 @@ class BackupStationWindow(Gtk.Window):
 
     def refresh_be_list(self):
         self.liststore.clear()
-        self.createBEList()
+        self.create_be_list()
 
-    def selectBE(self):
+    def select_be(self):
         selection = self.treeview.get_selection()
         model, paths = selection.get_selected_rows()
 
@@ -39,7 +39,7 @@ class BackupStationWindow(Gtk.Window):
         return bename
 
     # Window and callback used to create a BE.
-    def createBEWindow(self, button):
+    def create_be_window(self, button):
         window = PopupEntryWindow(self.create_callback)
         window.show_all()
 
@@ -49,31 +49,31 @@ class BackupStationWindow(Gtk.Window):
 
     # Window and callback used to rename a BE.
     def rename_callback(self, text):
-        bename = self.selectBE()
+        bename = self.select_be()
         bectl.rename_be(bename, text)
         self.refresh_be_list()
 
-    def renameBEWindow(self, button):
+    def rename_be_window(self, button):
         window = PopupEntryWindow(self.rename_callback)
         window.show_all()
 
-    def activateBE(self, button):
-        bename = self.selectBE()
+    def activate_be(self, button):
+        bename = self.select_be()
         bectl.activate_be(bename)
         self.refresh_be_list()
 
-    def deleteBE(self, button):
-        bename = self.selectBE()
+    def delete_be(self, button):
+        bename = self.select_be()
         bectl.destroy_be(bename)
         self.refresh_be_list()
 
-    def mountBE(self, button):
-        bename = self.selectBE()
+    def mount_be(self, button):
+        bename = self.select_be()
         bectl.mount_be(bename)
         self.refresh_be_list()
 
-    def umountBE(self, button):
-        bename = self.selectBE()
+    def umount_be(self, button):
+        bename = self.select_be()
         bectl.umount_be(bename)
         self.refresh_be_list()
 
@@ -84,7 +84,7 @@ class BackupStationWindow(Gtk.Window):
 
         # Create the liststore of boot environments.
         self.liststore = Gtk.ListStore(str, str, str, str, str, str)
-        self.createBEList()
+        self.create_be_list()
         self.treeview = Gtk.TreeView(model=self.liststore)
 
         # Create columns for the data
@@ -108,32 +108,32 @@ class BackupStationWindow(Gtk.Window):
         self.treeview.append_column(column_text)
 
         # Create the buttons to manipulate the BE's
-        createButton = Gtk.Button.new_with_label(_("Create BE"))
-        createButton.connect("clicked", self.createBEWindow)
+        create_button = Gtk.Button.new_with_label(_("Create BE"))
+        create_button.connect("clicked", self.create_be_window)
 
-        renameButton = Gtk.Button.new_with_label(_("Rename BE"))
-        renameButton.connect("clicked", self.renameBEWindow)
+        rename_button = Gtk.Button.new_with_label(_("Rename BE"))
+        rename_button.connect("clicked", self.rename_be_window)
 
-        activateButton = Gtk.Button.new_with_label(_("Activate BE"))
-        activateButton.connect("clicked", self.activateBE)
+        activate_button = Gtk.Button.new_with_label(_("Activate BE"))
+        activate_button.connect("clicked", self.activate_be)
 
-        deleteButton = Gtk.Button.new_with_label(_("Delete BE"))
-        deleteButton.connect("clicked", self.deleteBE)
+        delete_button = Gtk.Button.new_with_label(_("Delete BE"))
+        delete_button.connect("clicked", self.delete_be)
 
-        mountButton = Gtk.Button.new_with_label(_("Mount BE"))
-        mountButton.connect("clicked", self.mountBE)
+        mount_button = Gtk.Button.new_with_label(_("Mount BE"))
+        mount_button.connect("clicked", self.mount_be)
 
-        umountButton = Gtk.Button.new_with_label(_("Unmount BE"))
-        umountButton.connect("clicked", self.umountBE)
+        umount_button = Gtk.Button.new_with_label(_("Unmount BE"))
+        umount_button.connect("clicked", self.umount_be)
 
         # Create boxes to hold the treeview columns and the row of buttons
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
-        hbox.pack_start(createButton, True, True, 2)
-        hbox.pack_start(renameButton, True, True, 2)
-        hbox.pack_start(deleteButton, True, True, 2)
-        hbox.pack_start(activateButton, True, True, 2)
-        hbox.pack_start(mountButton, True, True, 2)
-        hbox.pack_start(umountButton, True, True, 2)
+        hbox.pack_start(create_button, True, True, 2)
+        hbox.pack_start(rename_button, True, True, 2)
+        hbox.pack_start(delete_button, True, True, 2)
+        hbox.pack_start(activate_button, True, True, 2)
+        hbox.pack_start(mount_button, True, True, 2)
+        hbox.pack_start(umount_button, True, True, 2)
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         vbox.pack_start(self.treeview, True, True, 2)
