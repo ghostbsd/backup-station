@@ -24,6 +24,10 @@ class BackupStationWindow(Gtk.Window):
         for element in data:
             self.liststore.append(element.split())
 
+    def refresh_be_list(self):
+        self.liststore.clear()
+        self.createBEList()
+
     def selectBE(self):
         selection = self.treeview.get_selection()
         model, paths = selection.get_selected_rows()
@@ -41,15 +45,13 @@ class BackupStationWindow(Gtk.Window):
 
     def create_callback(self, text):
         bectl.create_be(text)
-        self.liststore.clear()
-        self.createBEList()
+        self.refresh_be_list()
 
     # Window and callback used to rename a BE.
     def rename_callback(self, text):
         bename = self.selectBE()
         bectl.rename_be(bename, text)
-        self.liststore.clear()
-        self.createBEList()
+        self.refresh_be_list()
 
     def renameBEWindow(self, button):
         window = PopupEntryWindow(self.rename_callback)
@@ -58,26 +60,22 @@ class BackupStationWindow(Gtk.Window):
     def activateBE(self, button):
         bename = self.selectBE()
         bectl.activate_be(bename)
-        self.liststore.clear()
-        self.createBEList()
+        self.refresh_be_list()
 
     def deleteBE(self, button):
         bename = self.selectBE()
         bectl.destroy_be(bename)
-        self.liststore.clear()
-        self.createBEList()
+        self.refresh_be_list()
 
     def mountBE(self, button):
         bename = self.selectBE()
         bectl.mount_be(bename)
-        self.liststore.clear()
-        self.createBEList()
+        self.refresh_be_list()
 
     def umountBE(self, button):
         bename = self.selectBE()
         bectl.umount_be(bename)
-        self.liststore.clear()
-        self.createBEList()
+        self.refresh_be_list()
 
     def __init__(self):
         super().__init__(title=_("Backup Station"))
