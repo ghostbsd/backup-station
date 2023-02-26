@@ -63,9 +63,22 @@ class BackupStationWindow(Gtk.Window):
         self.refresh_be_list()
 
     def delete_be(self, button):
-        bename = self.select_be()
-        bectl.destroy_be(bename)
-        self.refresh_be_list()
+        dialog = Gtk.MessageDialog(
+            transient_for=self,
+            flags=0,
+            message_type=Gtk.MessageType.QUESTION,
+            buttons=Gtk.ButtonsType.OK_CANCEL,
+            title="Confirm Deletion",
+            text="Are you sure you want to delete this BE?"
+            )
+        response = dialog.run()
+        if response == Gtk.ResponseType.YES:
+            bename = self.select_be()
+            bectl.destroy_be(bename)
+            self.refresh_be_list()
+
+        dialog.destroy()
+
 
     def mount_be(self, button):
         bename = self.select_be()
