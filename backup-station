@@ -176,31 +176,6 @@ class PopupEntryWindow(Gtk.Window):
         box.pack_start(button, True, True, 2)
 
 
-class not_root(Gtk.Window):
-    def __init__(self):
-        Gtk.Window.__init__(self)
-        self.set_title(_("Backup Station"))
-        self.set_resizable(False)
-        self.connect("delete-event", Gtk.main_quit)
-        self.set_size_request(200, 80)
-        box1 = Gtk.VBox(homogeneous=False, spacing=0)
-        self.add(box1)
-        box1.show()
-        label = Gtk.Label(label=_('You need to be root'))
-        box1.pack_start(label, True, True, 0)
-        hBox = Gtk.HBox(homogeneous=False, spacing=0)
-        hBox.show()
-        box1.pack_end(hBox, False, False, 5)
-        ok_button = Gtk.Button()
-        ok_button.set_label("OK")
-        apply_img = Gtk.Image()
-        apply_img.set_from_icon_name('gtk-ok', 1)
-        ok_button.set_image(apply_img)
-        ok_button.connect("clicked", Gtk.main_quit)
-        hBox.pack_end(ok_button, False, False, 5)
-        self.show_all()
-
-
 class confirmation(Gtk.Window):
     def confirm_passwd(self, widget, user):
         pwd_hash = pwd.getpwnam(user).pw_passwd
@@ -210,30 +185,21 @@ class confirmation(Gtk.Window):
             BackupStationWindow().show_all()
         else:
             self.hide()
-            self.wrong_password()
-
-    def wrong_password(self):
-        window = Gtk.Window()
-        window.set_title(_("Backup Station"))
-        self.set_resizable(False)
-        window.connect("delete-event", Gtk.main_quit)
-        window.set_size_request(200, 80)
-        box1 = Gtk.VBox(homogeneous=False, spacing=0)
-        window.add(box1)
-        box1.show()
-        label = Gtk.Label(label=_('Wrong password'))
-        box1.pack_start(label, True, True, 0)
-        hBox = Gtk.HBox(homogeneous=False, spacing=0)
-        hBox.show()
-        box1.pack_end(hBox, False, False, 5)
-        ok_button = Gtk.Button()
-        ok_button.set_label("OK")
-        apply_img = Gtk.Image()
-        apply_img.set_from_icon_name('gtk-ok', 1)
-        ok_button.set_image(apply_img)
-        ok_button.connect("clicked", Gtk.main_quit)
-        hBox.pack_end(ok_button, False, False, 5)
-        window.show_all()
+            dialog = Gtk.MessageDialog(
+                transient_for=self,
+                flags=0,
+                message_type=Gtk.MessageType.QUESTION,
+                buttons=Gtk.ButtonsType.OK_CANCEL,
+                title="Wrong password",
+                text="Do you want to try again?"
+                )
+            response = dialog.run()
+            if response == Gtk.ResponseType.OK:
+                self.passwd.set_text("")
+                dialog.destroy()
+                self.show()
+            else:
+                Gtk.main_quit()
 
     def __init__(self, user):
         Gtk.Window.__init__(self)
@@ -274,6 +240,15 @@ if os.geteuid() == 0:
     else:
         confirmation(user)
 else:
-    not_root()
+    dialog = Gtk.MessageDialog(
+        transient_for=BackupStationWindow(),
+        flags=0,
+        message_type=Gtk.MessageType.ERROR,
+        buttons=Gtk.ButtonsType.CANCEL,
+        title="Insufficient privlages",
+        text="Backup Station must be run as root."
+        )
+    dialog.run()
+    exit()
 
 Gtk.main()
