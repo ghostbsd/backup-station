@@ -38,24 +38,54 @@ class BackupStationWindow(Gtk.Window):
 
         return bename
 
-    # Window and callback used to create a BE.
     def create_be_window(self, button):
-        window = PopupEntryWindow(self.create_callback)
-        window.show_all()
+        dialog = Gtk.Dialog(
+            transient_for=self,
+            flags=0,
+            title="Create BE",
+            )
 
-    def create_callback(self, text):
-        bectl.create_be(text)
-        self.refresh_be_list()
+        dialog.add_buttons(
+            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+            Gtk.STOCK_OK, Gtk.ResponseType.OK,
+                )
 
-    # Window and callback used to rename a BE.
-    def rename_callback(self, text):
-        bename = self.select_be()
-        bectl.rename_be(bename, text)
-        self.refresh_be_list()
+        name = Gtk.Entry()
+        box = dialog.get_content_area()
+        box.add(name)
+        box.show_all()
+
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            bectl.create_be(name.get_text())
+            self.refresh_be_list()
+
+        dialog.destroy()
 
     def rename_be_window(self, button):
-        window = PopupEntryWindow(self.rename_callback)
-        window.show_all()
+        dialog = Gtk.Dialog(
+            transient_for=self,
+            flags=0,
+            title="Rename BE",
+            )
+
+        dialog.add_buttons(
+            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+            Gtk.STOCK_OK, Gtk.ResponseType.OK,
+                )
+
+        name = Gtk.Entry()
+        box = dialog.get_content_area()
+        box.add(name)
+        box.show_all()
+
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            bename = self.select_be()
+            bectl.rename_be(bename, name.get_text())
+            self.refresh_be_list()
+
+        dialog.destroy()
 
     def activate_be(self, button):
         bename = self.select_be()
@@ -72,7 +102,7 @@ class BackupStationWindow(Gtk.Window):
             text="Are you sure you want to delete this BE?"
             )
         response = dialog.run()
-        if response == Gtk.ResponseType.YES:
+        if response == Gtk.ResponseType.OK:
             bename = self.select_be()
             bectl.destroy_be(bename)
             self.refresh_be_list()
@@ -153,27 +183,6 @@ class BackupStationWindow(Gtk.Window):
         vbox.pack_start(hbox, True, True, 2)
         self.add(vbox)
         self.connect("destroy", Gtk.main_quit)
-
-
-class PopupEntryWindow(Gtk.Window):
-    def clicked(self, button):
-        self.callback(self.entry.get_text())
-        self.destroy()
-
-    def __init__(self, callback):
-        super().__init__(title=_("BE Name Entry"))
-        self.set_resizable(False)
-        self.callback = callback
-        self.set_size_request(400, 25)
-        box = Gtk.Box()
-        self.add(box)
-
-        self.entry = Gtk.Entry()
-        box.pack_start(self.entry, True, True, 2)
-
-        button = Gtk.Button('OK')
-        button.connect("clicked", self.clicked)
-        box.pack_start(button, True, True, 2)
 
 
 class confirmation(Gtk.Window):
