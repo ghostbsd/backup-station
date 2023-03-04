@@ -39,50 +39,28 @@ class BackupStationWindow(Gtk.Window):
         return bename
 
     def create_be_window(self, button):
-        dialog = Gtk.Dialog(
-            transient_for=self,
-            flags=0,
-            title="Create BE",
-            )
-
-        dialog.add_buttons(
-            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-            Gtk.STOCK_OK, Gtk.ResponseType.OK,
-                )
-
-        name = Gtk.Entry()
-        box = dialog.get_content_area()
-        box.add(name)
-        box.show_all()
-
+        dialog = DialogWindow()
+        dialog.add_primary_text("Create a new boot environment")
+        dialog.add_secondary_text("Please enter a name for the boot environment.")
+        dialog.add_input()
         response = dialog.run()
+
         if response == Gtk.ResponseType.OK:
-            bectl.create_be(name.get_text())
+            bectl.create_be(dialog.input.get_text())
             self.refresh_be_list()
 
         dialog.destroy()
 
     def rename_be_window(self, button):
-        dialog = Gtk.Dialog(
-            transient_for=self,
-            flags=0,
-            title="Rename BE",
-            )
-
-        dialog.add_buttons(
-            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-            Gtk.STOCK_OK, Gtk.ResponseType.OK,
-                )
-
-        name = Gtk.Entry()
-        box = dialog.get_content_area()
-        box.add(name)
-        box.show_all()
-
+        dialog = DialogWindow()
+        dialog.add_primary_text("Rename a boot environment")
+        dialog.add_secondary_text("Please enter a new name for the boot environment.")
+        dialog.add_input()
         response = dialog.run()
+
         if response == Gtk.ResponseType.OK:
             bename = self.select_be()
-            bectl.rename_be(bename, name.get_text())
+            bectl.rename_be(bename, dialog.input.get_text())
             self.refresh_be_list()
 
         dialog.destroy()
@@ -93,22 +71,17 @@ class BackupStationWindow(Gtk.Window):
         self.refresh_be_list()
 
     def delete_be(self, button):
-        dialog = Gtk.MessageDialog(
-            transient_for=self,
-            flags=0,
-            message_type=Gtk.MessageType.QUESTION,
-            buttons=Gtk.ButtonsType.OK_CANCEL,
-            title="Confirm Deletion",
-            text="Are you sure you want to delete this BE?"
-            )
+        dialog = DialogWindow()
+        dialog.add_primary_text("Delete a boot environment")
+        dialog.add_secondary_text("Are you sure? This action cannot be undone.")
         response = dialog.run()
+
         if response == Gtk.ResponseType.OK:
             bename = self.select_be()
             bectl.destroy_be(bename)
             self.refresh_be_list()
 
         dialog.destroy()
-
 
     def mount_be(self, button):
         bename = self.select_be()
@@ -185,6 +158,40 @@ class BackupStationWindow(Gtk.Window):
         self.connect("destroy", Gtk.main_quit)
 
 
+class DialogWindow(Gtk.Dialog):
+    def add_input(self):
+        self.input = Gtk.Entry()
+        hbox = Gtk.HBox(homogeneous=False, spacing=0)
+        hbox.pack_start(self.input, True, True, 20)
+        self.update_content_area(hbox)
+
+    def add_primary_text(self, text):
+        self.primary_text = Gtk.Label()
+        self.primary_text.set_markup(f'<span size="large">{text}</span>')
+        self.update_content_area(self.primary_text)
+
+    def add_secondary_text(self, text):
+        self.secondary_text = Gtk.Label()
+        self.secondary_text.set_text(text)
+        self.update_content_area(self.secondary_text)
+
+    def update_content_area(self, widget):
+        vbox = self.get_content_area()
+        vbox.pack_start(widget, True, True, 5)
+        vbox.show_all()
+
+    def __init__(self):
+        Gtk.Dialog.__init__(self)
+        self.transient_for = self,
+        self.flags = 0,
+        self.title = self.set_title("Backup Station"),
+        self.add_buttons(
+            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+            Gtk.STOCK_OK, Gtk.ResponseType.OK,
+        )
+        self.set_size_request(300, 80)
+
+
 class confirmation(Gtk.Window):
     def confirm_passwd(self, widget, user):
         pwd_hash = pwd.getpwnam(user).pw_passwd
@@ -193,18 +200,13 @@ class confirmation(Gtk.Window):
             self.hide()
             BackupStationWindow().show_all()
         else:
-            self.hide()
-            dialog = Gtk.MessageDialog(
-                transient_for=self,
-                flags=0,
-                message_type=Gtk.MessageType.QUESTION,
-                buttons=Gtk.ButtonsType.OK_CANCEL,
-                title="Wrong password",
-                text="Do you want to try again?"
-                )
+            dialog = DialogWindow()
+            dialog.add_primary_text("Entered wrong password")
+            dialog.add_secondary_text("Would you like to try again?")
             response = dialog.run()
+
             if response == Gtk.ResponseType.OK:
-                self.passwd.set_text("")
+                self.passwd.grab_focus()
                 dialog.destroy()
                 self.show()
             else:
@@ -215,7 +217,7 @@ class confirmation(Gtk.Window):
         self.set_title(_("Backup Station"))
         self.set_resizable(False)
         self.connect("delete-event", Gtk.main_quit)
-        self.set_size_request(200, 80)
+        self.set_size_request(300, 80)
         vBox = Gtk.VBox(homogeneous=False, spacing=0)
         self.add(vBox)
         vBox.show()
@@ -249,15 +251,14 @@ if os.geteuid() == 0:
     else:
         confirmation(user)
 else:
-    dialog = Gtk.MessageDialog(
-        transient_for=BackupStationWindow(),
-        flags=0,
-        message_type=Gtk.MessageType.ERROR,
-        buttons=Gtk.ButtonsType.CANCEL,
-        title="Insufficient privlages",
-        text="Backup Station must be run as root."
-        )
-    dialog.run()
+    dialog = DialogWindow()
+    dialog.add_primary_text("Backup Station must be run with root privileges")
+    dialog.add_secondary_text("Would you like to use sudo?")
+    response = dialog.run()
+
+    if response == Gtk.ResponseType.OK:
+        os.popen("sudo backup-station")
+
     exit()
 
 Gtk.main()
