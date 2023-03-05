@@ -27,6 +27,7 @@ class BackupStationWindow(Gtk.Window):
     def refresh_be_list(self):
         self.liststore.clear()
         self.create_be_list()
+        self.treeview.grab_focus()
 
     def select_be(self):
         selection = self.treeview.get_selection()
@@ -34,9 +35,10 @@ class BackupStationWindow(Gtk.Window):
 
         for path in paths:
             iter = model.get_iter(path)
-            bename = model.get_value(iter, 0)
+            self.be_name = model.get_value(iter, 0)
+            self.be_not_active = model.get_value(iter, 1)
 
-        return bename
+        return self.be_name, self.be_not_active
 
     def create_be_window(self, button):
         dialog = DialogWindow()
@@ -59,8 +61,8 @@ class BackupStationWindow(Gtk.Window):
         response = dialog.run()
 
         if response == Gtk.ResponseType.OK:
-            bename = self.select_be()
-            bectl.rename_be(bename, dialog.input.get_text())
+            be_name = self.select_be()[0]
+            bectl.rename_be(be_name, dialog.input.get_text())
             self.refresh_be_list()
 
         dialog.destroy()
@@ -77,9 +79,18 @@ class BackupStationWindow(Gtk.Window):
         response = dialog.run()
 
         if response == Gtk.ResponseType.OK:
-            bename = self.select_be()
-            bectl.destroy_be(bename)
-            self.refresh_be_list()
+            be_name, be_not_active = self.select_be()
+            if (be_not_active == "-"):
+                bectl.destroy_be(be_name)
+                self.refresh_be_list()
+            else:
+                error = Gtk.Dialog("Backup Station")
+                message = Gtk.Label(label="You cannot delete an active boot environment")
+                message.show()
+                error.vbox.pack_start(message, True, True, 5)
+                error.add_buttons(Gtk.STOCK_OK, Gtk.ResponseType.OK)
+                error.run()
+                error.destroy()
 
         dialog.destroy()
 
@@ -176,14 +187,12 @@ class DialogWindow(Gtk.Dialog):
         self.update_content_area(self.secondary_text)
 
     def update_content_area(self, widget):
-        vbox = self.get_content_area()
-        vbox.pack_start(widget, True, True, 5)
-        vbox.show_all()
+        self.vbox.pack_start(widget, True, True, 5)
+        self.vbox.show_all()
 
     def __init__(self):
         Gtk.Dialog.__init__(self)
         self.transient_for = self,
-        self.flags = 0,
         self.title = self.set_title("Backup Station"),
         self.add_buttons(
             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
@@ -227,6 +236,7 @@ class confirmation(Gtk.Window):
         self.passwd = Gtk.Entry()
         self.passwd.set_visibility(False)
         self.passwd.connect("activate", self.confirm_passwd, user)
+        self.passwd.caps_lock_warning = True
         hBox = Gtk.HBox(homogeneous=False, spacing=0)
         hBox.show()
         vBox.pack_start(hBox, False, False, 5)
@@ -258,7 +268,6 @@ else:
 
     if response == Gtk.ResponseType.OK:
         os.popen("sudo backup-station")
-
     exit()
 
 Gtk.main()
