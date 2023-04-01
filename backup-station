@@ -17,67 +17,92 @@ _ = gettext.gettext
 
 
 class BackupStationWindow(Gtk.Window):
-    def createBEList(self):
+    def create_be_list(self):
         data = bectl.get_be_list()
         data.pop(0)
 
         for element in data:
             self.liststore.append(element.split())
 
-    def selectBE(self):
+    def refresh_be_list(self):
+        self.liststore.clear()
+        self.create_be_list()
+        self.treeview.grab_focus()
+
+    def select_be(self):
         selection = self.treeview.get_selection()
         model, paths = selection.get_selected_rows()
 
         for path in paths:
             iter = model.get_iter(path)
-            bename = model.get_value(iter, 0)
+            self.be_name = model.get_value(iter, 0)
+            self.be_not_active = model.get_value(iter, 1)
 
-        return bename
+        return self.be_name, self.be_not_active
 
-    # Window and callback used to create a BE.
-    def createBEWindow(self, button):
-        window = PopupEntryWindow(self.create_callback)
-        window.show_all()
+    def create_be_window(self, button):
+        dialog = DialogWindow()
+        dialog.add_primary_text("Create a new boot environment")
+        dialog.add_secondary_text("Please enter a name for the boot environment.")
+        dialog.add_input()
+        response = dialog.run()
 
-    def create_callback(self, text):
-        bectl.create_be(text)
-        self.liststore.clear()
-        self.createBEList()
+        if response == Gtk.ResponseType.OK:
+            bectl.create_be(dialog.input.get_text())
+            self.refresh_be_list()
 
-    # Window and callback used to rename a BE.
-    def rename_callback(self, text):
-        bename = self.selectBE()
-        bectl.rename_be(bename, text)
-        self.liststore.clear()
-        self.createBEList()
+        dialog.destroy()
 
-    def renameBEWindow(self, button):
-        window = PopupEntryWindow(self.rename_callback)
-        window.show_all()
+    def rename_be_window(self, button):
+        dialog = DialogWindow()
+        dialog.add_primary_text("Rename a boot environment")
+        dialog.add_secondary_text("Please enter a new name for the boot environment.")
+        dialog.add_input()
+        response = dialog.run()
 
-    def activateBE(self, button):
-        bename = self.selectBE()
+        if response == Gtk.ResponseType.OK:
+            be_name = self.select_be()[0]
+            bectl.rename_be(be_name, dialog.input.get_text())
+            self.refresh_be_list()
+
+        dialog.destroy()
+
+    def activate_be(self, button):
+        bename = self.select_be()
         bectl.activate_be(bename)
-        self.liststore.clear()
-        self.createBEList()
+        self.refresh_be_list()
 
-    def deleteBE(self, button):
-        bename = self.selectBE()
-        bectl.destroy_be(bename)
-        self.liststore.clear()
-        self.createBEList()
+    def delete_be(self, button):
+        dialog = DialogWindow()
+        dialog.add_primary_text("Delete a boot environment")
+        dialog.add_secondary_text("Are you sure? This action cannot be undone.")
+        response = dialog.run()
 
-    def mountBE(self, button):
-        bename = self.selectBE()
+        if response == Gtk.ResponseType.OK:
+            be_name, be_not_active = self.select_be()
+            if (be_not_active == "-"):
+                bectl.destroy_be(be_name)
+                self.refresh_be_list()
+            else:
+                error = Gtk.Dialog("Backup Station")
+                message = Gtk.Label(label="You cannot delete an active boot environment")
+                message.show()
+                error.vbox.pack_start(message, True, True, 5)
+                error.add_buttons(Gtk.STOCK_OK, Gtk.ResponseType.OK)
+                error.run()
+                error.destroy()
+
+        dialog.destroy()
+
+    def mount_be(self, button):
+        bename = self.select_be()
         bectl.mount_be(bename)
-        self.liststore.clear()
-        self.createBEList()
+        self.refresh_be_list()
 
-    def umountBE(self, button):
-        bename = self.selectBE()
+    def umount_be(self, button):
+        bename = self.select_be()
         bectl.umount_be(bename)
-        self.liststore.clear()
-        self.createBEList()
+        self.refresh_be_list()
 
     def __init__(self):
         super().__init__(title=_("Backup Station"))
@@ -86,7 +111,7 @@ class BackupStationWindow(Gtk.Window):
 
         # Create the liststore of boot environments.
         self.liststore = Gtk.ListStore(str, str, str, str, str, str)
-        self.createBEList()
+        self.create_be_list()
         self.treeview = Gtk.TreeView(model=self.liststore)
 
         # Create columns for the data
@@ -110,32 +135,32 @@ class BackupStationWindow(Gtk.Window):
         self.treeview.append_column(column_text)
 
         # Create the buttons to manipulate the BE's
-        createButton = Gtk.Button.new_with_label(_("Create BE"))
-        createButton.connect("clicked", self.createBEWindow)
+        create_button = Gtk.Button.new_with_label(_("Create BE"))
+        create_button.connect("clicked", self.create_be_window)
 
-        renameButton = Gtk.Button.new_with_label(_("Rename BE"))
-        renameButton.connect("clicked", self.renameBEWindow)
+        rename_button = Gtk.Button.new_with_label(_("Rename BE"))
+        rename_button.connect("clicked", self.rename_be_window)
 
-        activateButton = Gtk.Button.new_with_label(_("Activate BE"))
-        activateButton.connect("clicked", self.activateBE)
+        activate_button = Gtk.Button.new_with_label(_("Activate BE"))
+        activate_button.connect("clicked", self.activate_be)
 
-        deleteButton = Gtk.Button.new_with_label(_("Delete BE"))
-        deleteButton.connect("clicked", self.deleteBE)
+        delete_button = Gtk.Button.new_with_label(_("Delete BE"))
+        delete_button.connect("clicked", self.delete_be)
 
-        mountButton = Gtk.Button.new_with_label(_("Mount BE"))
-        mountButton.connect("clicked", self.mountBE)
+        mount_button = Gtk.Button.new_with_label(_("Mount BE"))
+        mount_button.connect("clicked", self.mount_be)
 
-        umountButton = Gtk.Button.new_with_label(_("Unmount BE"))
-        umountButton.connect("clicked", self.umountBE)
+        umount_button = Gtk.Button.new_with_label(_("Unmount BE"))
+        umount_button.connect("clicked", self.umount_be)
 
         # Create boxes to hold the treeview columns and the row of buttons
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
-        hbox.pack_start(createButton, True, True, 2)
-        hbox.pack_start(renameButton, True, True, 2)
-        hbox.pack_start(deleteButton, True, True, 2)
-        hbox.pack_start(activateButton, True, True, 2)
-        hbox.pack_start(mountButton, True, True, 2)
-        hbox.pack_start(umountButton, True, True, 2)
+        hbox.pack_start(create_button, True, True, 2)
+        hbox.pack_start(rename_button, True, True, 2)
+        hbox.pack_start(delete_button, True, True, 2)
+        hbox.pack_start(activate_button, True, True, 2)
+        hbox.pack_start(mount_button, True, True, 2)
+        hbox.pack_start(umount_button, True, True, 2)
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         vbox.pack_start(self.treeview, True, True, 2)
@@ -144,50 +169,36 @@ class BackupStationWindow(Gtk.Window):
         self.connect("destroy", Gtk.main_quit)
 
 
-class PopupEntryWindow(Gtk.Window):
-    def clicked(self, button):
-        self.callback(self.entry.get_text())
-        self.destroy()
+class DialogWindow(Gtk.Dialog):
+    def add_input(self):
+        self.input = Gtk.Entry()
+        hbox = Gtk.HBox(homogeneous=False, spacing=0)
+        hbox.pack_start(self.input, True, True, 20)
+        self.update_content_area(hbox)
 
-    def __init__(self, callback):
-        super().__init__(title=_("BE Name Entry"))
-        self.set_resizable(False)
-        self.callback = callback
-        self.set_size_request(400, 25)
-        box = Gtk.Box()
-        self.add(box)
+    def add_primary_text(self, text):
+        self.primary_text = Gtk.Label()
+        self.primary_text.set_markup(f'<span size="large">{text}</span>')
+        self.update_content_area(self.primary_text)
 
-        self.entry = Gtk.Entry()
-        box.pack_start(self.entry, True, True, 2)
+    def add_secondary_text(self, text):
+        self.secondary_text = Gtk.Label()
+        self.secondary_text.set_text(text)
+        self.update_content_area(self.secondary_text)
 
-        button = Gtk.Button('OK')
-        button.connect("clicked", self.clicked)
-        box.pack_start(button, True, True, 2)
+    def update_content_area(self, widget):
+        self.vbox.pack_start(widget, True, True, 5)
+        self.vbox.show_all()
 
-
-class not_root(Gtk.Window):
     def __init__(self):
-        Gtk.Window.__init__(self)
-        self.set_title(_("Backup Station"))
-        self.set_resizable(False)
-        self.connect("delete-event", Gtk.main_quit)
-        self.set_size_request(200, 80)
-        box1 = Gtk.VBox(homogeneous=False, spacing=0)
-        self.add(box1)
-        box1.show()
-        label = Gtk.Label(label=_('You need to be root'))
-        box1.pack_start(label, True, True, 0)
-        hBox = Gtk.HBox(homogeneous=False, spacing=0)
-        hBox.show()
-        box1.pack_end(hBox, False, False, 5)
-        ok_button = Gtk.Button()
-        ok_button.set_label("OK")
-        apply_img = Gtk.Image()
-        apply_img.set_from_icon_name('gtk-ok', 1)
-        ok_button.set_image(apply_img)
-        ok_button.connect("clicked", Gtk.main_quit)
-        hBox.pack_end(ok_button, False, False, 5)
-        self.show_all()
+        Gtk.Dialog.__init__(self)
+        self.transient_for = self,
+        self.title = self.set_title("Backup Station"),
+        self.add_buttons(
+            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+            Gtk.STOCK_OK, Gtk.ResponseType.OK,
+        )
+        self.set_size_request(300, 80)
 
 
 class confirmation(Gtk.Window):
@@ -198,38 +209,24 @@ class confirmation(Gtk.Window):
             self.hide()
             BackupStationWindow().show_all()
         else:
-            self.hide()
-            self.wrong_password()
+            dialog = DialogWindow()
+            dialog.add_primary_text("Entered wrong password")
+            dialog.add_secondary_text("Would you like to try again?")
+            response = dialog.run()
 
-    def wrong_password(self):
-        window = Gtk.Window()
-        window.set_title(_("Backup Station"))
-        self.set_resizable(False)
-        window.connect("delete-event", Gtk.main_quit)
-        window.set_size_request(200, 80)
-        box1 = Gtk.VBox(homogeneous=False, spacing=0)
-        window.add(box1)
-        box1.show()
-        label = Gtk.Label(label=_('Wrong password'))
-        box1.pack_start(label, True, True, 0)
-        hBox = Gtk.HBox(homogeneous=False, spacing=0)
-        hBox.show()
-        box1.pack_end(hBox, False, False, 5)
-        ok_button = Gtk.Button()
-        ok_button.set_label("OK")
-        apply_img = Gtk.Image()
-        apply_img.set_from_icon_name('gtk-ok', 1)
-        ok_button.set_image(apply_img)
-        ok_button.connect("clicked", Gtk.main_quit)
-        hBox.pack_end(ok_button, False, False, 5)
-        window.show_all()
+            if response == Gtk.ResponseType.OK:
+                self.passwd.grab_focus()
+                dialog.destroy()
+                self.show()
+            else:
+                Gtk.main_quit()
 
     def __init__(self, user):
         Gtk.Window.__init__(self)
         self.set_title(_("Backup Station"))
         self.set_resizable(False)
         self.connect("delete-event", Gtk.main_quit)
-        self.set_size_request(200, 80)
+        self.set_size_request(300, 80)
         vBox = Gtk.VBox(homogeneous=False, spacing=0)
         self.add(vBox)
         vBox.show()
@@ -239,6 +236,7 @@ class confirmation(Gtk.Window):
         self.passwd = Gtk.Entry()
         self.passwd.set_visibility(False)
         self.passwd.connect("activate", self.confirm_passwd, user)
+        self.passwd.caps_lock_warning = True
         hBox = Gtk.HBox(homogeneous=False, spacing=0)
         hBox.show()
         vBox.pack_start(hBox, False, False, 5)
@@ -263,6 +261,13 @@ if os.geteuid() == 0:
     else:
         confirmation(user)
 else:
-    not_root()
+    dialog = DialogWindow()
+    dialog.add_primary_text("Backup Station must be run with root privileges")
+    dialog.add_secondary_text("Would you like to use sudo?")
+    response = dialog.run()
+
+    if response == Gtk.ResponseType.OK:
+        os.popen("sudo backup-station")
+    exit()
 
 Gtk.main()
