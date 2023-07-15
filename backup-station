@@ -9,7 +9,7 @@ import pwd
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
-__VERSION__ = '0.1'
+__VERSION__ = '0.3'
 
 gettext.bindtextdomain('backup-station', '/usr/local/share/locale')
 gettext.textdomain('backup-station')
