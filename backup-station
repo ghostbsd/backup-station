@@ -9,7 +9,7 @@ import pwd
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
-__VERSION__ = '0.3'
+__VERSION__ = '0.3.1'
 
 gettext.bindtextdomain('backup-station', '/usr/local/share/locale')
 gettext.textdomain('backup-station')
@@ -68,7 +68,7 @@ class BackupStationWindow(Gtk.Window):
         dialog.destroy()
 
     def activate_be(self, button):
-        bename = self.select_be()
+        bename = self.select_be()[0]
         bectl.activate_be(bename)
         self.refresh_be_list()
 
@@ -95,12 +95,12 @@ class BackupStationWindow(Gtk.Window):
         dialog.destroy()
 
     def mount_be(self, button):
-        bename = self.select_be()
+        bename = self.select_be()[0]
         bectl.mount_be(bename)
         self.refresh_be_list()
 
     def umount_be(self, button):
-        bename = self.select_be()
+        bename = self.select_be()[0]
         bectl.umount_be(bename)
         self.refresh_be_list()
 
