@@ -42,8 +42,8 @@ class BackupStationWindow(Gtk.Window):
 
     def create_be_window(self, button):
         dialog = DialogWindow()
-        dialog.add_primary_text("Create a new boot environment")
-        dialog.add_secondary_text("Please enter a name for the boot environment.")
+        dialog.add_primary_text(_("Create a new boot environment"))
+        dialog.add_secondary_text(_("Please enter a name for the boot environment."))
         dialog.add_input()
         response = dialog.run()
 
@@ -55,8 +55,8 @@ class BackupStationWindow(Gtk.Window):
 
     def rename_be_window(self, button):
         dialog = DialogWindow()
-        dialog.add_primary_text("Rename a boot environment")
-        dialog.add_secondary_text("Please enter a new name for the boot environment.")
+        dialog.add_primary_text(_("Rename a boot environment"))
+        dialog.add_secondary_text(_("Please enter a new name for the boot environment."))
         dialog.add_input()
         response = dialog.run()
 
@@ -74,8 +74,8 @@ class BackupStationWindow(Gtk.Window):
 
     def delete_be(self, button):
         dialog = DialogWindow()
-        dialog.add_primary_text("Delete a boot environment")
-        dialog.add_secondary_text("Are you sure? This action cannot be undone.")
+        dialog.add_primary_text(_("Delete a boot environment"))
+        dialog.add_secondary_text(_("Are you sure? This action cannot be undone."))
         response = dialog.run()
 
         if response == Gtk.ResponseType.OK:
@@ -84,8 +84,8 @@ class BackupStationWindow(Gtk.Window):
                 bectl.destroy_be(be_name)
                 self.refresh_be_list()
             else:
-                error = Gtk.Dialog("Backup Station")
-                message = Gtk.Label(label="You cannot delete an active boot environment")
+                error = Gtk.Dialog(_("Backup Station"))
+                message = Gtk.Label(label=_("You cannot delete an active boot environment"))
                 message.show()
                 error.vbox.pack_start(message, True, True, 5)
                 error.add_buttons(Gtk.STOCK_OK, Gtk.ResponseType.OK)
@@ -193,7 +193,7 @@ class DialogWindow(Gtk.Dialog):
     def __init__(self):
         Gtk.Dialog.__init__(self)
         self.transient_for = self,
-        self.title = self.set_title("Backup Station"),
+        self.title = self.set_title(_("Backup Station")),
         self.add_buttons(
             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
             Gtk.STOCK_OK, Gtk.ResponseType.OK,
@@ -210,8 +210,8 @@ class confirmation(Gtk.Window):
             BackupStationWindow().show_all()
         else:
             dialog = DialogWindow()
-            dialog.add_primary_text("Entered wrong password")
-            dialog.add_secondary_text("Would you like to try again?")
+            dialog.add_primary_text(_("Entered wrong password"))
+            dialog.add_secondary_text(_("Would you like to try again?"))
             response = dialog.run()
 
             if response == Gtk.ResponseType.OK:
@@ -262,8 +262,8 @@ if os.geteuid() == 0:
         confirmation(user)
 else:
     dialog = DialogWindow()
-    dialog.add_primary_text("Backup Station must be run with root privileges")
-    dialog.add_secondary_text("Would you like to use sudo?")
+    dialog.add_primary_text(_("Backup Station must be run with root privileges"))
+    dialog.add_secondary_text(_("Would you like to use sudo?"))
     response = dialog.run()
 
     if response == Gtk.ResponseType.OK:
