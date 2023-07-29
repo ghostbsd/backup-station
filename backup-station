@@ -68,8 +68,8 @@ class BackupStationWindow(Gtk.Window):
         dialog.destroy()
 
     def activate_be(self, button):
-        bename = self.select_be()[0]
-        bectl.activate_be(bename)
+        be_name = self.select_be()[0]
+        bectl.activate_be(be_name)
         self.refresh_be_list()
 
     def delete_be(self, button):
@@ -95,13 +95,13 @@ class BackupStationWindow(Gtk.Window):
         dialog.destroy()
 
     def mount_be(self, button):
-        bename = self.select_be()[0]
-        bectl.mount_be(bename)
+        be_name = self.select_be()[0]
+        bectl.mount_be(be_name)
         self.refresh_be_list()
 
     def umount_be(self, button):
-        bename = self.select_be()[0]
-        bectl.umount_be(bename)
+        be_name = self.select_be()[0]
+        bectl.umount_be(be_name)
         self.refresh_be_list()
 
     def __init__(self):
