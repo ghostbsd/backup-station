@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-31 20:55+0300\n"
-"PO-Revision-Date: 2022-10-31 22:06+0300\n"
+"POT-Creation-Date: 2023-07-29 10:16+0300\n"
+"PO-Revision-Date: 2023-07-29 46:36+0300\n"
 "Last-Translator: Alexander Alexeev <alexax66@gmail.com>\n"
 "Language-Team: Language locale/ru\n"
 "Language: ru\n"
@@ -17,71 +16,103 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: backup-station.py:83 backup-station.py:170 backup-station.py:205
-#: backup-station.py:228
+#: backup-station.py:45
+msgid "Create a new boot environment"
+msgstr "Создание нового загрузочного окружения"
+
+#: backup-station.py:46
+msgid "Please enter a name for the boot environment."
+msgstr "Введите имя для загрузочного окружения."
+
+#: backup-station.py:58
+msgid "Rename a boot environment"
+msgstr "Переименование загрузочного окружения"
+
+#: backup-station.py:59
+msgid "Please enter a new name for the boot environment."
+msgstr "Введите новое имя для загрузочного окружения."
+
+#: backup-station.py:77
+msgid "Delete a boot environment"
+msgstr "Удаление загрузочного окружения"
+
+#: backup-station.py:78
+msgid "Are you sure? This action cannot be undone."
+msgstr "Вы уверены? Это действие не может быть отмененно."
+
+#: backup-station.py:87 backup-station.py:108 backup-station.py:196
+#: backup-station.py:226
 msgid "Backup Station"
 msgstr "Центр резеровного копирования"
 
-#: backup-station.py:94
+#: backup-station.py:88
+msgid "You cannot delete an active boot environment"
+msgstr "Вы не можите удалить активное загрузочное окружение"
+
+#: backup-station.py:119
 msgid "BE name"
 msgstr "Имя BE"
 
-#: backup-station.py:97
+#: backup-station.py:122
 msgid "Active"
 msgstr "Активно"
 
-#: backup-station.py:100
+#: backup-station.py:125
 msgid "Mountpoint"
 msgstr "Точка монтрования"
 
-#: backup-station.py:103
+#: backup-station.py:128
 msgid "Space"
 msgstr "Размер"
 
-#: backup-station.py:106
+#: backup-station.py:131
 msgid "Date"
 msgstr "Дата создания"
 
-#: backup-station.py:109
+#: backup-station.py:134
 msgid "Time"
 msgstr "Время создания"
 
-#: backup-station.py:113
+#: backup-station.py:138
 msgid "Create BE"
 msgstr "Создать BE"
 
-#: backup-station.py:116
+#: backup-station.py:141
 msgid "Rename BE"
 msgstr "Переименовать BE"
 
-#: backup-station.py:119
+#: backup-station.py:144
 msgid "Activate BE"
 msgstr "Активировать BE"
 
-#: backup-station.py:122
+#: backup-station.py:147
 msgid "Delete BE"
 msgstr "Удалить BE"
 
-#: backup-station.py:125
+#: backup-station.py:150
 msgid "Mount BE"
 msgstr "Примонтировать BE"
 
-#: backup-station.py:128
+#: backup-station.py:153
 msgid "Unmount BE"
 msgstr "Отмонтировать BE"
 
-#: backup-station.py:153
-msgid "BE Name Entry"
-msgstr "Ввод имени BE"
+#: backup-station.py:213
+msgid "Entered wrong password"
+msgstr "Введен неверный пароль"
 
-#: backup-station.py:177
-msgid "You need to be root"
-msgstr "У вас должны быть права root"
+#: backup-station.py:214
+msgid "Would you like to try again?"
+msgstr "Вы хотите попробывать снова?"
 
-#: backup-station.py:212
-msgid "Wrong password"
-msgstr "Неверный пароль"
-
-#: backup-station.py:235
+#: backup-station.py:233
 msgid "Confirm password for"
 msgstr "Подтвердите пароль для"
+
+#: backup-station.py:265
+msgid "Backup Station must be run with root privileges"
+msgstr "Центр резервного копирования должен быть запущен с правами root"
+
+#: backup-station.py:266
+msgid "Would you like to use sudo?"
+msgstr "Вы желаете использовать sudo?"

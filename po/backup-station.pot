@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-31 20:56+0300\n"
+"POT-Creation-Date: 2023-07-29 10:16+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,71 +16,103 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: backup-station.py:83 backup-station.py:170 backup-station.py:205
-#: backup-station.py:228
+#: backup-station.py:45
+msgid "Create a new boot environment"
+msgstr ""
+
+#: backup-station.py:46
+msgid "Please enter a name for the boot environment."
+msgstr ""
+
+#: backup-station.py:58
+msgid "Rename a boot environment"
+msgstr ""
+
+#: backup-station.py:59
+msgid "Please enter a new name for the boot environment."
+msgstr ""
+
+#: backup-station.py:77
+msgid "Delete a boot environment"
+msgstr ""
+
+#: backup-station.py:78
+msgid "Are you sure? This action cannot be undone."
+msgstr ""
+
+#: backup-station.py:87 backup-station.py:108 backup-station.py:196
+#: backup-station.py:226
 msgid "Backup Station"
 msgstr ""
 
-#: backup-station.py:94
-msgid "BE name"
-msgstr ""
-
-#: backup-station.py:97
-msgid "Active"
-msgstr ""
-
-#: backup-station.py:100
-msgid "Mountpoint"
-msgstr ""
-
-#: backup-station.py:103
-msgid "Space"
-msgstr ""
-
-#: backup-station.py:106
-msgid "Date"
-msgstr ""
-
-#: backup-station.py:109
-msgid "Time"
-msgstr ""
-
-#: backup-station.py:113
-msgid "Create BE"
-msgstr ""
-
-#: backup-station.py:116
-msgid "Rename BE"
+#: backup-station.py:88
+msgid "You cannot delete an active boot environment"
 msgstr ""
 
 #: backup-station.py:119
-msgid "Activate BE"
+msgid "BE name"
 msgstr ""
 
 #: backup-station.py:122
-msgid "Delete BE"
+msgid "Active"
 msgstr ""
 
 #: backup-station.py:125
-msgid "Mount BE"
+msgid "Mountpoint"
 msgstr ""
 
 #: backup-station.py:128
-msgid "Unmount BE"
+msgid "Space"
+msgstr ""
+
+#: backup-station.py:131
+msgid "Date"
+msgstr ""
+
+#: backup-station.py:134
+msgid "Time"
+msgstr ""
+
+#: backup-station.py:138
+msgid "Create BE"
+msgstr ""
+
+#: backup-station.py:141
+msgid "Rename BE"
+msgstr ""
+
+#: backup-station.py:144
+msgid "Activate BE"
+msgstr ""
+
+#: backup-station.py:147
+msgid "Delete BE"
+msgstr ""
+
+#: backup-station.py:150
+msgid "Mount BE"
 msgstr ""
 
 #: backup-station.py:153
-msgid "BE Name Entry"
+msgid "Unmount BE"
 msgstr ""
 
-#: backup-station.py:177
-msgid "You need to be root"
+#: backup-station.py:213
+msgid "Entered wrong password"
 msgstr ""
 
-#: backup-station.py:212
-msgid "Wrong password"
+#: backup-station.py:214
+msgid "Would you like to try again?"
 msgstr ""
 
-#: backup-station.py:235
+#: backup-station.py:233
 msgid "Confirm password for"
+msgstr ""
+
+#: backup-station.py:265
+msgid "Backup Station must be run with root privileges"
+msgstr ""
+
+#: backup-station.py:266
+msgid "Would you like to use sudo?"
 msgstr ""
