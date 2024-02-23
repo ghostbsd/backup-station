@@ -14,7 +14,7 @@ import DistUtilsExtra.command.clean_i18n
 # ,,python setup.py build_i18n -m''
 
 for line in open('backup-station').readlines():
-    if (line.startswith('__VERSION__')):
+    if line.startswith('__VERSION__'):
         exec(line.strip())
         break
 # Silence flake8, __VERSION__ is properly assigned below
