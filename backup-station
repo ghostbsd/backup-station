@@ -9,7 +9,7 @@ import pwd
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
-__VERSION__ = '0.4'
+__VERSION__ = '0.5'
 
 gettext.bindtextdomain('backup-station', '/usr/local/share/locale')
 gettext.textdomain('backup-station')
@@ -19,8 +19,6 @@ _ = gettext.gettext
 class BackupStationWindow(Gtk.Window):
     def create_be_list(self):
         data = bectl.get_be_list()
-        data.pop(0)
-
         for element in data:
             self.liststore.append(element.split())
 
